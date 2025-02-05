@@ -1,0 +1,53 @@
+#include <iostream>
+#include <algorithm> 
+
+using namespace std;
+
+int main() 
+{
+    
+    int arr[] = {1, 2, 3, 2, 4, 5, 6, 3, 7, 8, 9, 5, 1, 2};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    
+    sort(arr, arr + size);
+
+    
+    int duplicates[size / 2];
+    int duplicatesCount = 0; 
+
+    
+    for (int i = 0; i < size - 1; ++i) 
+    {
+       
+        if (arr[i] == arr[i + 1]) 
+        {
+            
+            bool alreadyExists = false;
+            for (int j = 0; j < duplicatesCount; ++j) 
+            {
+                if (duplicates[j] == arr[i]) 
+                {
+                    alreadyExists = true;
+                    break;
+                }
+            }
+            
+            if (!alreadyExists) 
+            {
+                duplicates[duplicatesCount] = arr[i];
+                duplicatesCount++;
+            }
+        }
+    }
+
+    
+    cout << "Повторяющиеся значения в массиве: ";
+    for (int i = 0; i < duplicatesCount; ++i) 
+    {
+        cout << duplicates[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
