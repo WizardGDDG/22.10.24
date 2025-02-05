@@ -1,0 +1,47 @@
+#include <iostream>
+#include <limits> 
+
+using namespace std;
+
+int main() 
+{
+   
+    int prices[10] = {50000, 75000, 60000, 75000, 80000, 70000, 80000, 65000, 80000, 72000};
+    int numCars = sizeof(prices) / sizeof(prices[0]);
+
+    
+    int maxPrice = numeric_limits<int>::min(); 
+    for (int i = 0; i < numCars; ++i) 
+    {
+        if (prices[i] > maxPrice) 
+        {
+            maxPrice = prices[i];
+        }
+    }
+
+    cout << "Наибольшая стоимость автомобиля: " << maxPrice << endl;
+
+    
+    int firstMaxIndex = -1, lastMaxIndex = -1;
+    for (int i = 0; i < numCars; ++i) 
+    {
+        if (prices[i] == maxPrice) 
+        {
+            if (firstMaxIndex == -1) 
+            {
+                firstMaxIndex = i + 1; 
+            }
+            lastMaxIndex = i + 1; 
+        }
+    }
+
+    if (firstMaxIndex != -1) 
+    {
+        cout << "Номер первого автомобиля с максимальной стоимостью: " << firstMaxIndex << endl;
+        cout << "Номер последнего автомобиля с максимальной стоимостью: " << lastMaxIndex << endl;
+    } else {
+        cout << "Автомобили с указанной стоимостью не найдены." << endl;
+    }
+
+    return 0;
+}
