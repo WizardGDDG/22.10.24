@@ -1,0 +1,53 @@
+#include <iostream>
+#include <numeric> 
+
+using namespace std;
+
+int main() 
+{
+    
+    int temperatures[31];
+    int numDays = sizeof(temperatures) / sizeof(temperatures[0]); 
+
+    
+    for (int i = 0; i < numDays; ++i) 
+    {
+        temperatures[i] = rand() % 41 - 20; 
+    }
+
+   
+    cout << "Температура за каждый день января:" << endl;
+    for (int i = 0; i < numDays; ++i) 
+    {
+        cout << "День " << i + 1 << ": " << temperatures[i] << " градусов" << endl;
+    }
+
+    
+    double averageTemperature;
+    if (numDays > 0) 
+    {
+        int sum = accumulate(temperatures, temperatures + numDays, 0);
+        averageTemperature = static_cast<double>(sum) / numDays;
+    } else {
+        averageTemperature = 0.0; // Если массив пуст
+    }
+    cout << "\nСредняя температура за январь: " << averageTemperature << " градусов" << endl;
+
+   
+    int threshold;
+    cout << "\nВведите температурную метку: ";
+    cin >> threshold;
+
+    int count = 0;
+    for (int i = 0; i < numDays; ++i) 
+    {
+        if (temperatures[i] < threshold) 
+        {
+            count++;
+        }
+    }
+
+    cout << "Температура опускалась ниже " << threshold << " градусов " << count << " раз(а)" << endl;
+
+    return 0;
+}
