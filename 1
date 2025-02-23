@@ -1,89 +1,75 @@
 #include <iostream>
-#include <vector>
-
+#include <cstdlib>
 using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "rus");
+	int arr[40];
+	int number_kvartiri = 0;
+	int number_people = 0;
+	int number_people1 = 0;
+	int number_people2 = 0;
+	int number_people3 = 0;
+	int number_people4 = 0;
+	int large_families = 0;
 
-int main() {
-    
-    vector<int> house(40);
+	cout << "Введите номер квартиры (В доме 40 квартир): ";
+	cin >> number_kvartiri;
+	if (number_kvartiri > 0 && number_kvartiri < 40)
+	{
+		for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); i++)
+		{
+			arr[i] = rand() % 7 + 1;
+		}
 
-    for (int i = 0; i < house.size(); ++i) 
-    {
-        house[i] = rand() % 10; 
-    }
-
-    
-    int apartmentNumber;
-    cout << "Введите номер квартиры (1-40): ";
-    cin >> apartmentNumber;
-
-    if (apartmentNumber >= 1 && apartmentNumber <= 40) 
-    {
-        int index = apartmentNumber - 1;
-        int residents = house[index];
-
-        
-        int entrance = (index / 10) + 1;
-        int floor = ((index % 10) / 2) + 1;
-
-        cout << "Квартира: " << apartmentNumber << endl;
-        cout << "Подъезд: " << entrance << endl;
-        cout << "Этаж: " << floor << endl;
-        cout << "Количество жильцов: " << residents << endl;
-
-        
-        int neighbor1 = -1, neighbor2 = -1;
-        if ((index % 2) == 0) 
-        { 
-            if (index + 1 < (entrance * 10) && (index + 1) < house.size()) 
-            {
-                neighbor2 = apartmentNumber + 1;
-            }
-        } else 
-        { 
-            if (index - 1 >= (entrance - 1) * 10) 
-            {
-                neighbor1 = apartmentNumber - 1;
-            }
-        }
-
-        cout << "Соседи на этаже: ";
-        if (neighbor1 != -1) 
-        {
-            cout << neighbor1 << " ";
-        }
-        if (neighbor2 != -1) 
-        {
-            cout << neighbor2 << " ";
-        }
-        cout << endl;
-    } else 
-    {
-        cout << "Некорректный номер квартиры." << endl;
-    }
-
-    /
-    cout << "\nСуммарное количество жильцов для каждого подъезда:" << endl;
-    for (int i = 0; i < 4; ++i) 
-    {
-        int totalResidents = 0;
-        for (int j = 0; j < 10; ++j) 
-        {
-            totalResidents += house[i * 10 + j];
-        }
-        cout << "Подъезд " << i + 1 << ": " << totalResidents << endl;
-    }
-
-    
-    cout << "\nНомера квартир, где живут многодетные семьи (более 5 человек):" << endl;
-    for (int i = 0; i < house.size(); ++i) 
-    {
-        if (house[i] > 5) 
-        {
-            cout << i + 1 << " ";
-        }
-    }
-    cout << endl;
-
-    return 0;
+		if (number_kvartiri % 2 == 0)
+		{
+			number_people += arr[number_kvartiri];
+			number_people += arr[number_kvartiri - 1];
+			cout << "На этом этаже проживают " << number_people << endl;
+		}
+		else
+		{
+			number_people += arr[number_kvartiri];
+			number_people += arr[number_kvartiri + 1];
+			cout << "На этом этаже проживают " << number_people << endl;
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			number_people1 += arr[i];
+		}
+		for (int i = 10; i < 20; i++)
+		{
+			number_people2 += arr[i];
+		}
+		for (int i = 20; i < 30; i++)
+		{
+			number_people3 += arr[i];
+		}
+		for (int i = 30; i < 40; i++)
+		{
+			number_people4 += arr[i];
+		}
+		
+		for (int i = 0; i < 40; i++)
+		{
+			
+			if (arr[i] > 5)
+			{
+				cout << "Квартира многодетной семьи " << i + 1 << endl;
+			}
+		}
+		cout << endl <<"Количество жильцев подъезд 1 " << number_people1 << endl;
+		cout << "Количество жильцев подъезд 2 " << number_people2 << endl;
+		cout << "Количество жильцев подъезд 3 " << number_people3 << endl;
+		cout << "Количество жильцев подъезд 4 " << number_people4 << endl;
+		cout << "Общее количество жильцов " << number_people1 + number_people2 + number_people3 + number_people4;
+	}
+	else
+	{
+		cout << "В доме нет такой квартиры";
+	}
+	
+	
+	
 }
